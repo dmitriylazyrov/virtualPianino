@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <link rel="stylesheet" href="css/style.css">
+    <title>Virtual Piano</title>
+  </head>
+  <body>
+    <div class="container">
+        <div class="black-keys">
+            <kbd id="cW">W</kbd>
+            <kbd id="cE">E</kbd>
+            <kbd id="cT">T</kbd>
+            <kbd id="cY">Y</kbd>
+            <kbd id="cU">U</kbd>
+        </div>
+        <div class="white-keys">
+         <kbd id="colorA">A</kbd>
+         <kbd id="colorS">S</kbd>
+         <kbd id="colorD">D</kbd>
+         <kbd id="colorF">F</kbd>
+         <kbd id="colorG">G</kbd>
+         <kbd id="colorH">H</kbd>
+         <kbd id="colorJ">J</kbd>
+        </div>
+    </div>
+
+    <script>
+        let buttons = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'W', 'E', 'T', 'Y', 'U']
+        function musicPlay(event) {
+            for (let key in buttons) {
+                if (event.code === "Key"+buttons[key]) {
+                    let audio = document.createElement("AUDIO");
+                    audio.src = "audio/" + buttons[key] + ".mp3";
+                    audio.play();
+                }
+            }
+        }
+
+        document.addEventListener("keydown", function(event){
+            for (let key in buttons) {
+                if (event.code === "Key"+buttons[key]) {
+                    let back = document.getElementById("color" + buttons[key]);
+                    back.style.background = "#cdb4db";
+                    musicPlay(event);
+                }
+            }
+        });
+
+        document.addEventListener("keydown", function(event){
+            for (let key in buttons) {
+                if (event.code === "Key"+buttons[key]) {
+                    let back = document.getElementById("c" + buttons[key]);
+                    back.style.background = "#cdb4db";
+                    musicPlay(event);
+                }
+            }
+        });
+
+        document.addEventListener("keyup",function(event){
+            for (let key in buttons) {
+                if (event.code === "Key"+buttons[key]) {
+                    let back = document.getElementById("color"+buttons[key]);
+                    back.style.background = "white";
+                }
+            }
+        });
+
+        document.addEventListener("keyup",function(event){
+            for (let key in buttons) {
+                if (event.code === "Key"+buttons[key]) {
+                    let back = document.getElementById("c"+buttons[key]);
+                    back.style.background = "black";
+                }
+            }
+        });
+    </script>
+
+  </body>
+</html>
